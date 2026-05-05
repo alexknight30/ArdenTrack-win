@@ -16,6 +16,9 @@ import threading
 import time
 from logging.handlers import RotatingFileHandler
 
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, ".env"))
+
 from filelock import FileLock, Timeout
 
 from ardentrack.paths import DATA_DIR, LOG_PATH, LOCK_PATH, BASE_DIR

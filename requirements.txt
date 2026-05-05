@@ -6,3 +6,4 @@ tzlocal
 filelock
 supabase>=2.10.0
 keyring>=25.0.0
+python-dotenv>=1.0.0

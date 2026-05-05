@@ -35,6 +35,10 @@ userdata/events_export.csv
 # PyInstaller
 *.spec
 
+# Environment / secrets
+.env
+.env.*
+
 # Temp files
 _test_*.py
 _check_*.py

@@ -183,6 +183,11 @@ function spawnPython() {
   const childEnv = { ...process.env };
   childEnv.ARDEN_AUTH_CALLBACK_PORT = port;
   childEnv.ARDEN_AUTH_CALLBACK_TOKEN = token;
+  childEnv.SUPABASE_URL =
+    process.env.SUPABASE_URL || "https://nnzlaeuatsclfqqbcmzs.supabase.co";
+  childEnv.SUPABASE_ANON_KEY =
+    process.env.SUPABASE_ANON_KEY ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5uemxhZXVhdHNjbGZxcWJjbXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3MDg5NzAsImV4cCI6MjA2ODI4NDk3MH0.e7BMtZdMpMOWiC2ao6-u_lo_nl63BV2y77aaGXXypac";
 
   pythonProcess = spawn(exe, [], {
     env: childEnv,

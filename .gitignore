@@ -35,6 +35,10 @@ userdata/events_export.csv
 # PyInstaller
 *.spec
 
+# Electron build output
+dist-electron/
+ardentrack-electron/node_modules/
+
 # Environment / secrets
 .env
 .env.*
@@ -42,6 +46,11 @@ userdata/events_export.csv
 # Dev tools
 dev_login.py
 dev_seed_test.py
+
+# Source assets (copies live in ardentrack-electron/build/)
+Arden_EULA.docx
+Arden_Privacy_Policy.docx
+Arden-logo.ico
 
 # Temp files
 _test_*.py

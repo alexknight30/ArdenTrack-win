@@ -20,6 +20,9 @@ if "%1"=="" (
 
 set VERSION=%1
 
+REM Add Windows SDK signtool to PATH
+set "PATH=C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64;%PATH%"
+
 echo.
 echo ========================================
 echo  ArdenTrack Release: %VERSION%

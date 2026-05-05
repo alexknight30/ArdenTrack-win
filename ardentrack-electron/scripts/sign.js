@@ -16,6 +16,13 @@
 
 const { execSync } = require("child_process");
 const path = require("path");
+const fs = require("fs");
+
+function resolveSigntool() {
+  const sdkPath = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\signtool.exe";
+  if (fs.existsSync(sdkPath)) return `"${sdkPath}"`;
+  return "signtool";
+}
 
 exports.default = async function sign(configuration) {
   const filePath = configuration.path;
@@ -30,7 +37,7 @@ exports.default = async function sign(configuration) {
   const tsaUrl = process.env.WIN_SIGN_TIMESTAMP || "http://timestamp.digicert.com";
 
   const cmd = [
-    "signtool",
+    resolveSigntool(),
     "sign",
     "/sha1", thumbprint,
     "/fd", "sha256",

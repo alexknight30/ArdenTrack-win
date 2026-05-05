@@ -2,6 +2,9 @@
 REM ArdenTrack — build dist\ardentrack.exe via PyInstaller
 REM Run from the repo root: build.bat
 
+REM Add Windows SDK signtool to PATH
+set "PATH=C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64;%PATH%"
+
 echo === Installing PyInstaller (if needed) ===
 pip install pyinstaller >nul 2>&1
 

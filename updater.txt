@@ -1,0 +1,12 @@
+I also ran git fetch --tags so your local repo has the v1.0.0 tag.
+
+Important detail: Your latest.yml points at ArdenTrack-Setup-1.0.0.exe (hyphens), while the file electron-builder leaves on disk is Arden Track Setup 1.0.0.exe-style with spaces (display name). For the release, I uploaded a copy with the hyphenated name so it matches latest.yml; otherwise electron-updater would hit the wrong URL and fail. Temporary copies next to your build were removed after upload.
+
+Next times: You can recreate the same flow with:
+
+cd path\to\ArdenTrack-win
+# copy installer + blockmap to names that match latest.yml (if they differ), then:
+gh release create v1.0.x ...assets... -R alexknight30/ArdenTrack-win -t "ArdenTrack v1.0.x" -n "..." --latest
+Or use your existing release.bat when you bump the version — it relies on GH_TOKEN for gh; your interactive gh session already stored a token in the keyring.
+
+You did not need to click through the GitHub UI for this one

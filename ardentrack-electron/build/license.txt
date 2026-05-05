@@ -1,0 +1,194 @@
+Arden
+End User License Agreement
+Effective Date: April 30, 2026
+
+IMPORTANT: PLEASE READ CAREFULLY
+This is a legally binding agreement between Arden ("Company") and you ("User"). By installing or running this application, you acknowledge that you have read and agreed to these terms.
+
+1. The License
+1.1 Grant of License
+Subject to your compliance with this Agreement, Company grants you a limited, non-exclusive, non-transferable, and revocable license to install and operate the Software solely for your internal professional use.
+
+1.2 Prohibited Conduct
+You shall not, and shall not permit any third party to:
+Reverse engineer, decompile, or disassemble the Software.
+Use the Software to build a competing product or service.
+Distribute, rent, or lease the Software to any third party.
+
+2. Data Privacy & Architecture
+2.1 Local-First Storage with Cloud Sync
+Arden is built on a local-first architecture. Customer Content - including time entry narratives, classifications, client information, matter information, and activity logs - is stored on your device. When you are signed in, this data is also synced to Company's cloud database (hosted on Supabase) to enable access from the Arden web application and to provide continuity across devices. Cloud-stored data is scoped to your authenticated account using row-level security, meaning only you can access your own data. Company personnel do not access Customer Content except as required for technical support at your request.
+
+2.2 Classification Processing
+To classify your activity into time entries, the Software transmits the following data to Company's classification API: activity metadata (app names, window titles, timestamps, and durations) and your client and matter information. This data is forwarded to OpenAI's API for processing. It is not stored by Render or OpenAI. Company has disabled the "Share inputs and outputs with OpenAI" and "API call logging" settings in its OpenAI organization dashboard, ensuring submitted data is not used to train OpenAI's models.
+
+2.3 Third-Party Integrations
+If you use Arden's Clio integration, time entries you choose to send to Clio are transmitted to and stored by Clio in accordance with their own privacy policy. This transmission occurs at your explicit direction. Company bears no responsibility for data handled by Clio or any other third-party integration you elect to use.
+
+2.4 Usage Telemetry
+The only data stored by Company is limited usage telemetry: application uptime, number of events collected, number of chunks classified, and crash reports. This data is used solely to improve platform performance and is retained for 12 months. We do not use telemetry data to train large language models (LLMs) or generative AI features.
+
+2.5 Encryption & Legal Accessibility
+Company does not possess decryption keys for Customer Content stored on your device. For data synced to the cloud, Company employs industry-standard encryption at rest and in transit via its Supabase-hosted backend. Company will only access cloud-stored Customer Content as required to comply with valid legal process or at your explicit request for technical support.
+
+2.6 Physical Security and Unauthorized Access
+User acknowledges that the physical and digital security of the device running the Software is the User's sole responsibility. Company is not liable for any data breach or loss of Customer Content resulting from:
+The theft, loss, or misplacement of User's hardware.
+Compromised local passwords or biometric security.
+Failure to implement Full Disk Encryption on the host device.
+
+3. Professional Responsibility and Liability
+3.1 No Legal Advice
+The Software is a productivity tool and does not constitute the practice of law. Arden is not a law firm. Use of the Software does not create an attorney-client relationship.
+
+3.2 Professional Judgment & Agentic Actions
+The Software is an aid, not a substitute for your independent professional judgment. You are solely responsible for:
+Human-in-the-Loop Review: Verifying all time entries, classifications, and outputs produced by the Software before use or submission.
+Automated Actions: Any actions initiated by the Software (e.g., time entry generation, Clio sync) are performed at your direction. Company bears no liability for automated outputs that the User fails to review or override.
+
+3.3 Limitation of Liability
+(a) Disclaimer of Certain Damages. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL COMPANY BE LIABLE FOR ANY INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES, INCLUDING WITHOUT LIMITATION DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES.
+
+(b) Specific Malpractice Exclusion. COMPANY EXPRESSLY DISCLAIMS ANY LIABILITY FOR CLAIMS OF LEGAL MALPRACTICE, PROFESSIONAL ERRORS OR OMISSIONS, OR DISCIPLINARY ACTIONS TAKEN AGAINST USER, REGARDLESS OF WHETHER SUCH CLAIMS ARISE FROM THE USE OR INABILITY TO USE THE SOFTWARE.
+
+(c) Maximum Cap. IN NO EVENT SHALL COMPANY'S AGGREGATE LIABILITY FOR ALL CLAIMS RELATED TO THE SOFTWARE EXCEED THE TOTAL AMOUNT OF FEES PAID BY USER TO COMPANY DURING THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM. THE EXISTENCE OF MORE THAN ONE CLAIM WILL NOT ENLARGE THIS LIMIT.
+
+3.4 Third-Party Services and Infrastructure
+THE SOFTWARE UTILIZES THIRD-PARTY INFRASTRUCTURE AND AI MODELS PROVIDED BY SUPABASE, RENDER, AND OPENAI. TO THE MAXIMUM EXTENT PERMITTED BY LAW, COMPANY SHALL NOT BE LIABLE FOR ANY DATA BREACHES, SERVICE INTERRUPTIONS, ERRORS, OR OMISSIONS CAUSED BY THESE PROVIDERS. USER ACKNOWLEDGES THAT THE AVAILABILITY AND SECURITY OF THE SOFTWARE ARE SUBJECT TO THE PERFORMANCE OF THESE THIRD PARTIES, AND COMPANY DISCLAIMS ALL LIABILITY ARISING FROM FAILURES IN THIRD-PARTY SYSTEMS.
+
+4. Ethics & Compliance
+4.1 Rules of Professional Conduct
+You warrant that your use of the Software complies with the Rules of Professional Conduct in your jurisdiction, specifically regarding the supervision of non-human assistants and the use of AI tools in legal practice.
+
+4.2 Suspension of Service
+We reserve the right to terminate your license immediately and without refund if we determine the Software is being used for dishonest, fraudulent, or unethical purposes.
+
+5. Local Integrity & Termination
+5.1 Backup Responsibility
+Although Customer Content is synced to Company's cloud backend when you are signed in, you are solely responsible for implementing an independent backup and disaster recovery strategy for all data processed by the Software. Cloud-synced data is provided for convenience and cross-device access, not as a backup service.
+
+5.2 Governing Law
+This Agreement shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions.
+
+5.3 Updates to This Agreement
+Company reserves the right to update this Agreement at any time. Material changes will be communicated via email or in-app notice at least 14 days before taking effect. Continued use of the Software after the effective date constitutes acceptance of the revised terms.
+
+5.4 Termination
+Either party may terminate this Agreement at any time, at which point services will end upon completion of the current subscription cycle. You are responsible for any data exports prior to uninstallation. Upon account deletion, cloud-synced Customer Content will be removed from Company's servers within 30 days.
+
+6. Notices & Contact
+All notices, requests, and other communications under this Agreement should be directed to Company via the contact information below. We aim to respond to all legal or privacy-related inquiries within three (3) business days.
+
+Arden
+Email: support@ardentime.com
+Address: 2108 N St Ste N, Sacramento, CA 95816
+
+
+================================================================================
+
+Arden
+Privacy Policy
+Effective Date: April 30, 2026  |  Contact: support@ardentime.com
+
+Arden ("Company," "we," or "us") is committed to protecting your privacy. This Privacy Policy explains what information we collect, how we use it, and your rights with respect to that information. By installing or using the Arden application ("Software"), you agree to the practices described below.
+
+1. What Arden Does Not Collect
+Arden is built on a local-first architecture. Customer Content is stored on your device and, when you are signed in, synced to Company's cloud database (hosted on Supabase) scoped to your authenticated account. The following data is never transmitted to any third party for storage beyond Supabase:
+The content of your documents, files, or screen activity
+
+When you are signed in, the following data is synced to Supabase so that it is accessible from the Arden web application and across your devices:
+Your client names, matter names, and profile information
+Time entry narratives and classifications generated by the Software
+Cloud-synced data is protected by row-level security; only your authenticated account can access it.
+
+Note: Activity metadata (app names, window titles, timestamps, and durations) along with your client and matter information are transmitted to our classification API for processing, as described in Section 4. This data is used solely to classify your time entries and is not stored by any third party.
+
+If you use Arden's Clio integration, time entries you choose to send to Clio are transmitted to and stored by Clio in accordance with their own privacy policy. This transmission occurs at your explicit direction and is governed by your agreement with Clio.
+
+2. Information We Do Collect
+2.1 Account and Authentication Data
+When you create an Arden account, we collect:
+Your email address and hashed password (via Supabase Auth), or
+Your Google account identifier if you choose Google OAuth sign-in
+Your subscription and billing status
+
+This data is stored in Arden's Supabase-hosted backend and is used solely to authenticate you, manage your subscription, and provide account support.
+
+2.2 Usage Telemetry
+Arden automatically collects limited usage telemetry to monitor application health and improve the product. This telemetry data includes:
+App open and close events
+Session uptime (in minutes)
+Number of activity events collected per session
+Number of chunks classified per session
+A device-level UUID (randomly generated, not tied to your identity) and a user_id linked to your account
+
+Telemetry is first stored locally in ardentrack.db on your device and is synced to Arden's servers (hosted on Supabase) approximately every 24 hours and upon application close.
+
+We do not use telemetry data to train large language models (LLMs) or generative AI features.
+
+3. How We Use Your Information
+Account data is used to authenticate you, manage your license, and provide customer support.
+Telemetry data is used to monitor application stability, measure feature engagement, and prioritize product improvements.
+We do not sell, rent, or share your personal information with third parties for marketing purposes.
+
+4. Third-Party Service Providers
+Arden relies on the following third-party infrastructure providers to operate. Each receives only the minimum data necessary for their function:
+
+4.1 Supabase
+Supabase (supabase.com) hosts Arden's authentication backend, telemetry database, and cloud-synced Customer Content (time entries, matters, clients, and profile data). Supabase receives your account credentials (email/hashed password or OAuth token), anonymized telemetry records, and the Customer Content you generate while signed in. All cloud-stored data is scoped to your authenticated account using row-level security. Supabase's privacy practices are governed by their Privacy Policy at supabase.com/privacy.
+
+4.2 Render
+Render (render.com) hosts the classification API that processes your activity data. During classification, a 6-minute chunk of activity metadata (app names, window titles, timestamps, and durations) along with your client and matter information are transmitted to Render's servers, combined with our internal system prompt, and forwarded to OpenAI. Arden does not connect external log drains in Render, and our application is configured not to log request or response content. All data in transit is encrypted via TLS. Render's privacy practices are available at render.com/privacy.
+
+4.3 OpenAI
+OpenAI (openai.com) provides the AI model (currently GPT-4o mini 5.0) used to classify your activity chunks. To perform classification, OpenAI receives activity metadata (app names, window titles, timestamps, and durations) along with your client and matter information. This is the minimum information required to accurately assign time entries to the correct matter. OpenAI does not receive the content of your documents or files. Arden has disabled two data-sharing settings in the OpenAI organization dashboard: "Share inputs and outputs with OpenAI" and "API call logging" are both set to Disabled. This ensures that no data submitted via the API is stored by OpenAI or used to train its models. OpenAI's privacy practices are available at openai.com/policies/privacy-policy.
+
+4.4 ArdenTrack
+ArdenTrack is Arden's proprietary activity-tracking system, bundled with the Software. It runs as a local process on your device and does not transmit data externally. ArdenTrack collects only app names, window titles, timestamps, and durations - never the content of your work. This data is stored locally and used solely as the input to Arden's classification pipeline.
+
+5. Data Storage and Retention
+5.1 Local and Cloud Data
+Customer Content (log.csv, sheet.csv, matters.json, clients.json, profile.json) is stored on your device. When you are signed in, this data is also synced to Company's Supabase-hosted backend, scoped to your authenticated account using row-level security. Cloud-synced data is retained as long as your account is active. You remain responsible for your own backup and disaster recovery strategy for locally stored data.
+
+5.2 Account Data
+Account credentials and subscription status are retained in our Supabase backend for as long as your account remains active, and for a reasonable period thereafter to resolve billing disputes or legal obligations.
+
+5.3 Telemetry Data
+Telemetry records are retained on Arden's Supabase servers for 12 months. After this period, records are automatically deleted. To request early deletion of your telemetry data, email support@ardentime.com and we will process it within 30 days.
+
+6. Data Security
+Arden takes the following measures to protect your data:
+All data in transit between your device, Render, and OpenAI is encrypted using TLS (the industry standard for secure communications).
+Arden has disabled "Share inputs and outputs with OpenAI" and "API call logging" in the OpenAI organization dashboard, confirming that no activity data submitted to the API is stored or used by OpenAI for model training.
+Arden does not connect external log drains in Render, and our classification API is configured not to log request or response content.
+Supabase employs industry-standard access controls and encryption for data at rest.
+
+However, the security of Customer Content on your device is your sole responsibility. Arden strongly recommends enabling Full Disk Encryption on the device running the Software. We are not liable for data loss or breach resulting from theft, loss, or compromise of your device.
+
+7. Your Privacy Rights
+7.1 California Residents (CCPA)
+If you are a California resident, you have the following rights under the California Consumer Privacy Act:
+Right to Know: You may request a description of the categories and specific pieces of personal information we have collected about you.
+Right to Delete: You may request deletion of your personal information, subject to certain exceptions.
+Right to Opt Out of Sale: Arden does not sell your personal information.
+Right to Non-Discrimination: We will not discriminate against you for exercising your CCPA rights.
+
+To submit a CCPA request, contact us at support@ardentime.com. We will respond within 45 days.
+
+7.2 All Users
+Account deletion: You may request deletion of your Arden account and associated account data at any time by contacting support@ardentime.com.
+Telemetry opt-out: To opt out of usage telemetry collection, email support@ardentime.com with the subject line "Telemetry Opt-Out" and we will manually disable collection for your account within 5 business days.
+
+8. Children's Privacy
+Arden is a professional productivity tool intended for use by adults. We do not knowingly collect personal information from individuals under the age of 18. If we become aware that we have collected information from a minor, we will delete it promptly. If you believe a minor has created an account, please contact us at support@ardentime.com.
+
+9. Changes to This Policy
+We may update this Privacy Policy from time to time. If we make material changes, we will notify you by email (at the address associated with your account) or via an in-app notice at least 14 days before the changes take effect. Your continued use of the Software after the effective date of the updated policy constitutes your acceptance of the changes.
+
+10. Contact Us
+If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:
+
+Arden
+Email: support@ardentime.com
+Address: 2108 N St Ste N, Sacramento, CA 95816
+Response time: We aim to respond to all privacy-related inquiries within 3 business days.

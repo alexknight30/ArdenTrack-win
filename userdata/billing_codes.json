@@ -1,0 +1,1075 @@
+{
+  "disabledTaskCodes": [],
+  "disabledActivityCodes": [],
+  "customTaskCodes": [],
+  "customActivityCodes": [],
+  "clioSyncedActivityCodes": [
+    {
+      "code": "A101",
+      "label": "A101 Plan and prepare for"
+    },
+    {
+      "code": "A102",
+      "label": "A102 Research"
+    },
+    {
+      "code": "A103",
+      "label": "A103 Draft/revise"
+    },
+    {
+      "code": "A104",
+      "label": "A104 Review/analyze"
+    },
+    {
+      "code": "A105",
+      "label": "A105 Communicate (in firm)"
+    },
+    {
+      "code": "A106",
+      "label": "A106 Communicate (with client)"
+    },
+    {
+      "code": "A107",
+      "label": "A107 Communicate (other outside counsel)"
+    },
+    {
+      "code": "A108",
+      "label": "A108 Communicate (other external)"
+    },
+    {
+      "code": "A109",
+      "label": "A109 Appear for/attend"
+    },
+    {
+      "code": "A110",
+      "label": "A110 Manage data/files"
+    },
+    {
+      "code": "A111",
+      "label": "A111 Other"
+    },
+    {
+      "code": "A112",
+      "label": "A112 Billable Travel Time"
+    },
+    {
+      "code": "A113",
+      "label": "A113 Communicate (witnesses)"
+    },
+    {
+      "code": "A114",
+      "label": "A114 Communicate (experts)"
+    },
+    {
+      "code": "A129",
+      "label": "A129 (UK) Communicate (with Outside Counsel)"
+    },
+    {
+      "code": "A107",
+      "label": "A107 (UK) Communicate (Other Party(s)/other outside lawyers)"
+    }
+  ],
+  "clioSyncedTaskCodes": [
+    {
+      "code": "L110",
+      "label": "L110 Fact Investigation/Development",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L120",
+      "label": "L120 Analysis/Strategy",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L130",
+      "label": "L130 Experts/Consultants",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L140",
+      "label": "L140 Document/File Management",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L150",
+      "label": "L150 Budgeting",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L160",
+      "label": "L160 Settlement/Non-Binding ADR",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L190",
+      "label": "L190 Other Case Assessment, Development and Administration",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L210",
+      "label": "L210 Pleadings",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L220",
+      "label": "L220 Preliminary Injunctions/Provisional Remedies",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L230",
+      "label": "L230 Court Mandated Conferences",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L240",
+      "label": "L240 Dispositive Motions",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L250",
+      "label": "L250 Other Written Motions and Submissions",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L260",
+      "label": "L260 Class Action Certification and Notice",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L310",
+      "label": "L310 Written Discovery",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L320",
+      "label": "L320 Document Production",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L330",
+      "label": "L330 Depositions",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L340",
+      "label": "L340 Expert Discovery",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L350",
+      "label": "L350 Discovery Motions",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L390",
+      "label": "L390 Other Discovery",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L410",
+      "label": "L410 Fact Witnesses",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L420",
+      "label": "L420 Expert Witnesses",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L430",
+      "label": "L430 Written Motions and Submissions",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L440",
+      "label": "L440 Other Trial Preparation and Support",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L450",
+      "label": "L450 Trial and Hearing Attendance",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L460",
+      "label": "L460 Post-Trial Motions and Submissions",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L470",
+      "label": "L470 Enforcement",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L510",
+      "label": "L510 Appellate Motions and Submissions",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L520",
+      "label": "L520 Appellate Briefs",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L530",
+      "label": "L530 Oral Argument",
+      "phase": "Litigation"
+    },
+    {
+      "code": "B110",
+      "label": "B110 Case Administration",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B120",
+      "label": "B120 Asset Analysis and Recovery",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B130",
+      "label": "B130 Asset Disposition",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B140",
+      "label": "B140 Relief from Stay/Adequate Protection Proceedings",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B150",
+      "label": "B150 Meetings of and Communications with Creditors",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B160",
+      "label": "B160 Fee/Employment Applications",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B170",
+      "label": "B170 Fee/Employment Objections",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B180",
+      "label": "B180 Avoidance Action Analysis",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B185",
+      "label": "B185 Assumption/Rejection of Leases and Contracts",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B190",
+      "label": "B190 Other Contested Matters (excluding assumption/rejection motions)",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B195",
+      "label": "B195 Non-Working Travel",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B210",
+      "label": "B210 Business Operations",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B220",
+      "label": "B220 Employee Benefits/Pensions",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B230",
+      "label": "B230 Financing/Cash Collections",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B240",
+      "label": "B240 Tax Issues",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B250",
+      "label": "B250 Real Estate",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B260",
+      "label": "B260 Board of Directors Matters",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B310",
+      "label": "B310 Claims Administration and Objections",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B320",
+      "label": "B320 Plan and Disclosure Statement (including Business Plan)",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B410",
+      "label": "B410 General Bankruptcy Advice/Opinions",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "B420",
+      "label": "B420 Restructurings",
+      "phase": "Bankruptcy"
+    },
+    {
+      "code": "C100",
+      "label": "C100 Fact Gathering",
+      "phase": "Counseling"
+    },
+    {
+      "code": "C200",
+      "label": "C200 Researching Law",
+      "phase": "Counseling"
+    },
+    {
+      "code": "C300",
+      "label": "C300 Analysis and Advice",
+      "phase": "Counseling"
+    },
+    {
+      "code": "C400",
+      "label": "C400 Third Party Communication",
+      "phase": "Counseling"
+    },
+    {
+      "code": "P100",
+      "label": "P100 Project Administration",
+      "phase": "Project"
+    },
+    {
+      "code": "P210",
+      "label": "P210 Corporate Review",
+      "phase": "Project"
+    },
+    {
+      "code": "P220",
+      "label": "P220 Tax",
+      "phase": "Project"
+    },
+    {
+      "code": "P230",
+      "label": "P230 Environmental",
+      "phase": "Project"
+    },
+    {
+      "code": "P240",
+      "label": "P240 Real and Personal Property",
+      "phase": "Project"
+    },
+    {
+      "code": "P250",
+      "label": "P250 Employee/Labor",
+      "phase": "Project"
+    },
+    {
+      "code": "P260",
+      "label": "P260 Intellectual Property",
+      "phase": "Project"
+    },
+    {
+      "code": "P270",
+      "label": "P270 Regulatory Reviews",
+      "phase": "Project"
+    },
+    {
+      "code": "P280",
+      "label": "P280 Other",
+      "phase": "Project"
+    },
+    {
+      "code": "P300",
+      "label": "P300 Structure/Strategy/Analysis",
+      "phase": "Project"
+    },
+    {
+      "code": "P400",
+      "label": "P400 Initial Document Preparation/Filing",
+      "phase": "Project"
+    },
+    {
+      "code": "P500",
+      "label": "P500 Negotiation/Revision/Responses",
+      "phase": "Project"
+    },
+    {
+      "code": "P600",
+      "label": "P600 Completion/Closing",
+      "phase": "Project"
+    },
+    {
+      "code": "P700",
+      "label": "P700 Post-Completion/Post-Closing",
+      "phase": "Project"
+    },
+    {
+      "code": "P800",
+      "label": "P800 Maintenance and Renewal",
+      "phase": "Project"
+    },
+    {
+      "code": "PA110",
+      "label": "PA110 Fact Investigation and Development",
+      "phase": "Project"
+    },
+    {
+      "code": "PA120",
+      "label": "PA120 Analysis/Strategy",
+      "phase": "Project"
+    },
+    {
+      "code": "PA130",
+      "label": "PA130 Document/File Management",
+      "phase": "Project"
+    },
+    {
+      "code": "PA140",
+      "label": "PA140 Budgeting",
+      "phase": "Project"
+    },
+    {
+      "code": "PA199",
+      "label": "PA199 Other Assessment, Development, or Administration",
+      "phase": "Project"
+    },
+    {
+      "code": "PA210",
+      "label": "PA210 State-of-the-Art Investigation",
+      "phase": "Project"
+    },
+    {
+      "code": "PA220",
+      "label": "PA220 Patentability Investigation",
+      "phase": "Project"
+    },
+    {
+      "code": "PA230",
+      "label": "PA230 Clearance Investigation",
+      "phase": "Project"
+    },
+    {
+      "code": "PA240",
+      "label": "PA240 Validity Investigation",
+      "phase": "Project"
+    },
+    {
+      "code": "PA250",
+      "label": "PA250 Publication Watches",
+      "phase": "Project"
+    },
+    {
+      "code": "PA260",
+      "label": "PA260 Infringement Investigation",
+      "phase": "Project"
+    },
+    {
+      "code": "PA270",
+      "label": "PA270 Status Investigation",
+      "phase": "Project"
+    },
+    {
+      "code": "PA299",
+      "label": "PA299 Other Patent Investigation and Analysis",
+      "phase": "Project"
+    },
+    {
+      "code": "PA310",
+      "label": "PA310 Provisional Application Preparation - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA320",
+      "label": "PA320 Non-Provisional Application Preparation - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA330",
+      "label": "PA330 Design Application Preparation - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA340",
+      "label": "PA340 Plant Patent Preparation - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA350",
+      "label": "PA350 Continuing Application Preparation - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA360",
+      "label": "PA360 Validation Patent Application Preparation - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA399",
+      "label": "PA399 Other Patent Application Preparation - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA410",
+      "label": "PA410 Information Disclosure Statement - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA420",
+      "label": "PA420 Preliminary Amendment - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA430",
+      "label": "PA430 Official Communication - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA440",
+      "label": "PA440 Quasi-Judicial Administrative Proceedings - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA450",
+      "label": "PA450 Post-Issuance Remedial Action - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA499",
+      "label": "PA499 Other Patent Prosecution - Domestic",
+      "phase": "Project"
+    },
+    {
+      "code": "PA510",
+      "label": "PA510 Provisional Application Preparation - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA520",
+      "label": "PA520 Non-Provisional Application Preparation - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA530",
+      "label": "PA530 Design Application Preparation - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA540",
+      "label": "PA540 Plant Patent Preparation - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA550",
+      "label": "PA550 Continuing Application Preparation - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA560",
+      "label": "PA560 Validation Patent Application Preparation - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA599",
+      "label": "PA599 Other Patent Application Preparation - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA610",
+      "label": "PA610 Information Disclosure Statement - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA620",
+      "label": "PA620 Preliminary Amendment - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA630",
+      "label": "PA630 Official Communication - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA640",
+      "label": "PA640 Quasi-Judicial Administrative Proceedings - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA650",
+      "label": "PA650 Post-Issuance Remedial Action - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA699",
+      "label": "PA699 Other Patent Prosecution - International",
+      "phase": "Project"
+    },
+    {
+      "code": "PA710",
+      "label": "PA710 Opinion Preparation",
+      "phase": "Project"
+    },
+    {
+      "code": "PA720",
+      "label": "PA720 Portfolio Analysis and Management",
+      "phase": "Project"
+    },
+    {
+      "code": "PA730",
+      "label": "PA730 Assignments and Security Interests",
+      "phase": "Project"
+    },
+    {
+      "code": "PA740",
+      "label": "PA740 Licensing",
+      "phase": "Project"
+    },
+    {
+      "code": "TR110",
+      "label": "TR110 Fact Investigation and Development",
+      "phase": "Other"
+    },
+    {
+      "code": "TR120",
+      "label": "TR120 Analysis/Strategy",
+      "phase": "Other"
+    },
+    {
+      "code": "TR130",
+      "label": "TR130 Document/File Management",
+      "phase": "Other"
+    },
+    {
+      "code": "TR140",
+      "label": "TR140 Budgeting",
+      "phase": "Other"
+    },
+    {
+      "code": "TR199",
+      "label": "TR199 Other Assessment, Development, or Administration",
+      "phase": "Other"
+    },
+    {
+      "code": "TR220",
+      "label": "TR220 Registerability Investigation",
+      "phase": "Other"
+    },
+    {
+      "code": "TR230",
+      "label": "TR230 Clearance Investigation",
+      "phase": "Other"
+    },
+    {
+      "code": "TR240",
+      "label": "TR240 Opposition Investigation",
+      "phase": "Other"
+    },
+    {
+      "code": "TR250",
+      "label": "TR250 Publication Watches",
+      "phase": "Other"
+    },
+    {
+      "code": "TR260",
+      "label": "TR260 Enforcement Investigation",
+      "phase": "Other"
+    },
+    {
+      "code": "TR270",
+      "label": "TR270 Status Investigation",
+      "phase": "Other"
+    },
+    {
+      "code": "TR299",
+      "label": "TR299 Other Trademark Investigation and Analysis",
+      "phase": "Other"
+    },
+    {
+      "code": "TR310",
+      "label": "TR310 Application Preparation and Filing - Domestic",
+      "phase": "Other"
+    },
+    {
+      "code": "TR399",
+      "label": "TR399 Other Domestic Trademark Application Preparation and Filing",
+      "phase": "Other"
+    },
+    {
+      "code": "TR410",
+      "label": "TR410 Affidavits, Petitions, Extensions, Declarations, and Other Filings - Domestic",
+      "phase": "Other"
+    },
+    {
+      "code": "TR420",
+      "label": "TR420 Preliminary Amendment - Domestic",
+      "phase": "Other"
+    },
+    {
+      "code": "TR430",
+      "label": "TR430 Official Communication - Domestic",
+      "phase": "Other"
+    },
+    {
+      "code": "TR440",
+      "label": "TR440 Quasi-Judicial Administrative Proceeding - Domestic",
+      "phase": "Other"
+    },
+    {
+      "code": "TR499",
+      "label": "TR499 Other Trademark Prosecution - Domestic",
+      "phase": "Other"
+    },
+    {
+      "code": "TR510",
+      "label": "TR510 Application Preparation and Filing - International",
+      "phase": "Other"
+    },
+    {
+      "code": "TR599",
+      "label": "TR599 Other International Trademark Application Preparation and Filing",
+      "phase": "Other"
+    },
+    {
+      "code": "TR610",
+      "label": "TR610 Affidavits, Petitions, Extensions, Declarations, and Other Filings - International",
+      "phase": "Other"
+    },
+    {
+      "code": "TR620",
+      "label": "TR620 Preliminary Amendment - International",
+      "phase": "Other"
+    },
+    {
+      "code": "TR630",
+      "label": "TR630 Official Communication - International",
+      "phase": "Other"
+    },
+    {
+      "code": "TR640",
+      "label": "TR640 Quasi-Judicial Administrative Proceedings - International",
+      "phase": "Other"
+    },
+    {
+      "code": "TR699",
+      "label": "TR699 Other Trademark Prosecution - International",
+      "phase": "Other"
+    },
+    {
+      "code": "TR710",
+      "label": "TR710 Opinion Preparation",
+      "phase": "Other"
+    },
+    {
+      "code": "TR720",
+      "label": "TR720 Portfolio Analysis and Management",
+      "phase": "Other"
+    },
+    {
+      "code": "TR730",
+      "label": "TR730 Assignments and Security Interests",
+      "phase": "Other"
+    },
+    {
+      "code": "TR740",
+      "label": "TR740 Licensing",
+      "phase": "Other"
+    },
+    {
+      "code": "TR750",
+      "label": "TR750 Domain Names - gTLDs",
+      "phase": "Other"
+    },
+    {
+      "code": "TR760",
+      "label": "TR760 Domain Names - ccTLDs",
+      "phase": "Other"
+    },
+    {
+      "code": "TR770",
+      "label": "TR770 Quasi-Judicial Administrative Proceedings - Domain Names",
+      "phase": "Other"
+    },
+    {
+      "code": "TR799",
+      "label": "TR799 Other Trademark Prosecution",
+      "phase": "Other"
+    },
+    {
+      "code": "L601",
+      "label": "L601 Discovery planning",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L602",
+      "label": "L602 Interviews",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L609",
+      "label": "L609 Quality assurance and control",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L611",
+      "label": "L611 Preservation order",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L612",
+      "label": "L612 Legal hold",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L619",
+      "label": "L619 Quality assurance and control",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L621",
+      "label": "L621 Collection/Recovery",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L622",
+      "label": "L622 Media costs",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L623",
+      "label": "L623 Media/ESI Transfer, Receipt, Inventory",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L629",
+      "label": "L629 Quality assurance and control",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L631",
+      "label": "L631 ESI stage, preparation and process",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L632",
+      "label": "L632 Scanning - Hard Copy",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L633",
+      "label": "L633 Foreign language translation",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L634",
+      "label": "L634 Exception handling",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L639",
+      "label": "L639 Quality assurance and control",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L651",
+      "label": "L651 Hosting costs",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L693",
+      "label": "L693 Review Planning & Training",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L652",
+      "label": "L652 Objective and Subjective coding",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L653",
+      "label": "L653 First pass document review",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L654",
+      "label": "L654 Second pass document review",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L655",
+      "label": "L655 Privilege review",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L656",
+      "label": "L656 Redaction",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L659",
+      "label": "L659 Quality assurance and control",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L660",
+      "label": "L660 Analysis",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L671",
+      "label": "L671 Conversion of ESI to production format",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L679",
+      "label": "L679 Quality assurance and control",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L680",
+      "label": "L680 Presentation",
+      "phase": "Litigation"
+    },
+    {
+      "code": "L690",
+      "label": "L690 Project Management",
+      "phase": "Litigation"
+    },
+    {
+      "code": "JA10",
+      "label": "JA10 Funding",
+      "phase": "Other"
+    },
+    {
+      "code": "JB10",
+      "label": "JB10 Budgeting - Own Side's Costs",
+      "phase": "Other"
+    },
+    {
+      "code": "JB20",
+      "label": "JB20 Budgeting - Precedent H",
+      "phase": "Other"
+    },
+    {
+      "code": "JB30",
+      "label": "JB30 Budgeting - Between the Parties",
+      "phase": "Other"
+    },
+    {
+      "code": "JC10",
+      "label": "JC10 Factual Investigation",
+      "phase": "Other"
+    },
+    {
+      "code": "JC20",
+      "label": "JC20 Legal Investigation",
+      "phase": "Other"
+    },
+    {
+      "code": "JC30",
+      "label": "JC30 Pre-action Protocol (or similar) Work",
+      "phase": "Other"
+    },
+    {
+      "code": "JD10",
+      "label": "JD10 Mediation",
+      "phase": "Other"
+    },
+    {
+      "code": "JD20",
+      "label": "JD20 Other Settlement Matters",
+      "phase": "Other"
+    },
+    {
+      "code": "JE10",
+      "label": "JE10 Issue and Serve Proceeding and Preparation of Statement(s) of Case",
+      "phase": "Other"
+    },
+    {
+      "code": "JE20",
+      "label": "JE20 Review of Other Party(s)' Statements of Case",
+      "phase": "Other"
+    },
+    {
+      "code": "JE30",
+      "label": "JE30 Requests for Further Information",
+      "phase": "Other"
+    },
+    {
+      "code": "JE40",
+      "label": "JE40 Amendment of Statements of Case",
+      "phase": "Other"
+    },
+    {
+      "code": "JF10",
+      "label": "JF10 Preparation of the Disclosure Report and the Disclosure Proposal",
+      "phase": "Other"
+    },
+    {
+      "code": "JF20",
+      "label": "JF20 Obtaining and Reviewing Documents",
+      "phase": "Other"
+    },
+    {
+      "code": "JF30",
+      "label": "JF30 Preparing and Service Disclosure Lists",
+      "phase": "Other"
+    },
+    {
+      "code": "JF40",
+      "label": "JF40 Inspection and Review of the Other Side's Disclosure for Work Undertaken After Exchange of Disclosure Lists",
+      "phase": "Other"
+    },
+    {
+      "code": "JG10",
+      "label": "JG10 Taking, Preparing, and Finalising Witness Statement(s)",
+      "phase": "Other"
+    },
+    {
+      "code": "JG20",
+      "label": "JG20 Reviewing Other Party(s)' Witness Statement(s)",
+      "phase": "Other"
+    },
+    {
+      "code": "JH10",
+      "label": "JH10 Own Expert Evidence",
+      "phase": "Other"
+    },
+    {
+      "code": "JH20",
+      "label": "JH20 Other Party(s)' Expert Evidence",
+      "phase": "Other"
+    },
+    {
+      "code": "JH30",
+      "label": "JH30 Joint Expert Evidence",
+      "phase": "Other"
+    },
+    {
+      "code": "JI10",
+      "label": "JI10 Case Management Conference",
+      "phase": "Other"
+    },
+    {
+      "code": "JI20",
+      "label": "JI20 Pre Trial Review",
+      "phase": "Other"
+    },
+    {
+      "code": "JI30",
+      "label": "JI30 Costs Management Conference",
+      "phase": "Other"
+    },
+    {
+      "code": "JJ10",
+      "label": "JJ10 Applications Relating to Originating Process or Statement of Case or For Default or Summary Judgment",
+      "phase": "Other"
+    }
+  ],
+  "clioLastSynced": "2026-04-23T19:29:57.404Z"
+}

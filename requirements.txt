@@ -1,0 +1,8 @@
+pywin32
+psutil
+watchdog
+requests
+tzlocal
+filelock
+supabase>=2.10.0
+keyring>=25.0.0

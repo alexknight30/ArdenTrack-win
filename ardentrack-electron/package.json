@@ -1,0 +1,59 @@
+{
+  "name": "ardentrack-electron",
+  "version": "1.0.0",
+  "description": "Headless Electron shell for ArdenTrack (tray, Python spawn, OAuth protocol, auto-update)",
+  "main": "main.js",
+  "author": "Arden",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.arden.ardentrack",
+    "productName": "ArdenTrack",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "YOUR_GITHUB_USER",
+        "repo": "ardentrack-electron"
+      }
+    ],
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "installerLanguages": ["en_US"],
+      "createDesktopShortcut": false,
+      "runAfterFinish": true
+    },
+    "protocols": [
+      {
+        "name": "Arden OAuth",
+        "schemes": ["arden"]
+      }
+    ],
+    "extraResources": [
+      {
+        "from": "../dist/",
+        "to": ".",
+        "filter": ["ardentrack.exe"]
+      }
+    ],
+    "win": {
+      "target": ["nsis"],
+      "signAndEditExecutable": false
+    }
+  }
+}

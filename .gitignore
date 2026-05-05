@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Runtime data (lives in %LOCALAPPDATA%\Arden\, not in repo)
+userdata/ardentrack.db
+userdata/ardentrack.db-wal
+userdata/ardentrack.db-shm
+userdata/ardentrack.log
+userdata/sheet.csv
+userdata/sheet.csv.lock
+userdata/events_export.csv
+
+# PyInstaller
+*.spec
+
+# Temp files
+_test_*.py
+_check_*.py
+*.tmp

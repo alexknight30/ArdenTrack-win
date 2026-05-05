@@ -47,7 +47,7 @@ def _setup_logging():
     handler.setFormatter(formatter)
 
     root = logging.getLogger()
-    root.setLevel(logging.INFO)
+    root.setLevel(logging.DEBUG if os.environ.get("ARDEN_DEBUG") else logging.INFO)
     root.addHandler(handler)
 
     console = logging.StreamHandler()
@@ -113,25 +113,34 @@ def main():
     except Exception as e:
         logger.warning("Telemetry app_open insert skipped: %s", e)
 
+    logger.info("SUPABASE_URL = %s", os.environ.get("SUPABASE_URL", "<not set>"))
+    logger.info("SUPABASE_ANON_KEY = %s", "set (%d chars)" % len(os.environ.get("SUPABASE_ANON_KEY", "")) if os.environ.get("SUPABASE_ANON_KEY") else "<not set>")
+
     token_received_event = threading.Event()
     if not auth.has_credentials():
+        logger.info("No stored auth credentials — starting auth listener on localhost")
         auth_server.start_auth_listener(token_received_event)
         if not token_received_event.wait(timeout=AUTH_WAIT_SEC):
             logger.warning(
                 "No auth credentials within %ds — continuing in offline-only mode",
                 AUTH_WAIT_SEC,
             )
+    else:
+        logger.info("Found existing auth credentials in keyring")
 
     tok = auth.get_valid_token()
     if tok:
+        logger.info("Auth token valid — starting initial Supabase sync")
         try:
             supabase_sync.pull_matters()
             supabase_sync.pull_clients()
             supabase_sync.pull_profile()
             supabase_sync.push_unsynced_entries()
+            logger.info("Initial Supabase sync complete")
         except Exception:
             logger.exception("Initial Supabase sync")
     else:
+        logger.warning("No valid auth token — Supabase sync skipped")
         if auth.has_credentials():
             logger.warning(
                 "Could not refresh auth token — operating offline with cached SQLite data",

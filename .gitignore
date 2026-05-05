@@ -39,6 +39,10 @@ userdata/events_export.csv
 .env
 .env.*
 
+# Dev tools
+dev_login.py
+dev_seed_test.py
+
 # Temp files
 _test_*.py
 _check_*.py

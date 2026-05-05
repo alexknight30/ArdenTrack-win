@@ -44,6 +44,52 @@ def _load_keyring():
     return keyring
 
 
+_CRED_CHUNK_SIZE = 1200
+
+
+def _set_chunked(kr, service: str, key: str, value: str) -> None:
+    """Store a value that may exceed Windows Credential Manager's byte limit."""
+    _delete_chunked(kr, service, key)
+    if len(value) <= _CRED_CHUNK_SIZE:
+        kr.set_password(service, key, value)
+        return
+    chunks = [value[i:i + _CRED_CHUNK_SIZE] for i in range(0, len(value), _CRED_CHUNK_SIZE)]
+    kr.set_password(service, key, f"__chunked__:{len(chunks)}")
+    for i, chunk in enumerate(chunks):
+        kr.set_password(service, f"{key}__chunk_{i}", chunk)
+
+
+def _get_chunked(kr, service: str, key: str) -> str | None:
+    raw = kr.get_password(service, key)
+    if raw is None:
+        return None
+    if not raw.startswith("__chunked__:"):
+        return raw
+    n = int(raw.split(":")[1])
+    parts = []
+    for i in range(n):
+        part = kr.get_password(service, f"{key}__chunk_{i}")
+        if part is None:
+            return None
+        parts.append(part)
+    return "".join(parts)
+
+
+def _delete_chunked(kr, service: str, key: str) -> None:
+    try:
+        raw = kr.get_password(service, key)
+        if raw and raw.startswith("__chunked__:"):
+            n = int(raw.split(":")[1])
+            for i in range(n):
+                try:
+                    kr.delete_password(service, f"{key}__chunk_{i}")
+                except Exception:
+                    pass
+        kr.delete_password(service, key)
+    except Exception:
+        pass
+
+
 def store_tokens(
     access_token: str,
     refresh_token: str,
@@ -54,8 +100,8 @@ def store_tokens(
     expiry_dt = datetime.now(timezone.utc) + timedelta(seconds=float(expires_in))
     expiry_iso = expiry_dt.isoformat()
 
-    kr.set_password(KEYRING_SERVICE, KR_ACCESS, access_token)
-    kr.set_password(KEYRING_SERVICE, KR_REFRESH, refresh_token)
+    _set_chunked(kr, KEYRING_SERVICE, KR_ACCESS, access_token)
+    _set_chunked(kr, KEYRING_SERVICE, KR_REFRESH, refresh_token)
     kr.set_password(KEYRING_SERVICE, KR_EXPIRY, expiry_iso)
 
     claims = _jwt_payload_unverified(access_token)
@@ -86,7 +132,7 @@ def store_tokens(
 def get_refresh_token() -> str | None:
     try:
         kr = _load_keyring()
-        return kr.get_password(KEYRING_SERVICE, KR_REFRESH)
+        return _get_chunked(kr, KEYRING_SERVICE, KR_REFRESH)
     except Exception:
         return None
 
@@ -94,7 +140,7 @@ def get_refresh_token() -> str | None:
 def get_access_token() -> str | None:
     try:
         kr = _load_keyring()
-        return kr.get_password(KEYRING_SERVICE, KR_ACCESS)
+        return _get_chunked(kr, KEYRING_SERVICE, KR_ACCESS)
     except Exception:
         return None
 
@@ -115,11 +161,12 @@ def get_token_expiry() -> datetime | None:
 
 def clear_tokens() -> None:
     kr = _load_keyring()
-    for user in (KR_ACCESS, KR_REFRESH, KR_EXPIRY):
-        try:
-            kr.delete_password(KEYRING_SERVICE, user)
-        except Exception:
-            pass
+    _delete_chunked(kr, KEYRING_SERVICE, KR_ACCESS)
+    _delete_chunked(kr, KEYRING_SERVICE, KR_REFRESH)
+    try:
+        kr.delete_password(KEYRING_SERVICE, KR_EXPIRY)
+    except Exception:
+        pass
 
 
 def is_token_expired() -> bool:

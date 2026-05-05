@@ -22,13 +22,19 @@ def _get_client():
         url = (os.environ.get("SUPABASE_URL") or "").strip()
         anon = (os.environ.get("SUPABASE_ANON_KEY") or "").strip()
         if not url or not anon:
+            logger.debug("Supabase env vars missing — URL=%s, KEY=%s",
+                         "set" if url else "MISSING", "set" if anon else "MISSING")
             return None
         access = auth.get_valid_token()
         refresh = auth.get_refresh_token()
         if not access or not refresh:
+            logger.debug("No auth tokens — access=%s, refresh=%s",
+                         "present" if access else "MISSING", "present" if refresh else "MISSING")
             return None
+        logger.debug("Creating Supabase client for %s", url)
         client = create_client(url, anon)
         client.auth.set_session(access, refresh)
+        logger.debug("Supabase session set successfully")
         return client
     except Exception:
         logger.exception("_get_client")
@@ -121,9 +127,12 @@ def pull_matters() -> None:
     try:
         client = _get_client()
         if not client:
+            logger.debug("pull_matters: skipped (no client)")
             return
+        logger.debug("pull_matters: fetching from Supabase…")
         res = client.table("matters").select("*").execute()
         rows = getattr(res, "data", None) or []
+        logger.info("pull_matters: got %d rows from Supabase", len(rows))
         for cloud in rows:
             try:
                 name = cloud.get("name")
@@ -144,9 +153,12 @@ def pull_clients() -> None:
     try:
         client = _get_client()
         if not client:
+            logger.debug("pull_clients: skipped (no client)")
             return
+        logger.debug("pull_clients: fetching from Supabase…")
         res = client.table("clients").select("*").execute()
         rows = getattr(res, "data", None) or []
+        logger.info("pull_clients: got %d rows from Supabase", len(rows))
         for cloud in rows:
             try:
                 name = cloud.get("name")
@@ -167,7 +179,9 @@ def pull_profile() -> None:
     try:
         client = _get_client()
         if not client:
+            logger.debug("pull_profile: skipped (no client)")
             return
+        logger.debug("pull_profile: fetching from Supabase…")
         res = client.table("profile").select("*").limit(1).execute()
         raw = getattr(res, "data", None)
         if isinstance(raw, list):
@@ -175,7 +189,9 @@ def pull_profile() -> None:
         else:
             cloud = raw
         if not cloud:
+            logger.info("pull_profile: no profile row found in Supabase")
             return
+        logger.info("pull_profile: got profile from Supabase — firm=%s", cloud.get("firm_name"))
         local = db.get_profile_row()
         merged = _merge_row(local, cloud, db.PROFILE_COLUMNS, "id")
         merged["id"] = 1
@@ -201,6 +217,7 @@ def pull_profile() -> None:
 def push_unsynced_entries() -> None:
     try:
         entries = db.get_unsynced_entries()
+        logger.info("push_unsynced_entries: %d entries to push", len(entries))
         for ent in entries:
             try:
                 push_time_entry(ent)

@@ -1,0 +1,62 @@
+Here are precise setup instructions for the website side so it matches what your desktop app already expects.
+
+What the desktop app expects
+Browser opens: https://ardentime.com/auth/desktop-callback (your shipped Electron code uses the apex domain; your browser may show www — treat both the same for routing and Supabase config).
+
+After login, the browser must navigate to something like:
+
+arden://auth/callback?access_token=…&refresh_token=…&expires_in=…
+
+Query names must be exactly: access_token, refresh_token, expires_in (Electron reads them with URL search params).
+
+Electron then POSTs those tokens to 127.0.0.1 (your Python listener). You do not implement that on the server; only the deep link step is on the website.
+
+1) Supabase Dashboard
+In the Supabase project that matches your anon URL (nnzlaeuatsclfqqbcmzs, from your logs):
+
+Authentication → URL configuration
+
+Under Redirect URLs, add all of these (adjust if you only use one hostname):
+
+https://ardentime.com/auth/desktop-callback
+https://www.ardentime.com/auth/desktop-callback
+arden://auth/callback (if the dashboard allows custom schemes; if not, keep web-only redirects and use only the https://… callback for OAuth, then redirect to arden://… from your page — see below)
+Save.
+
+If Supabase rejects arden:// as a redirect target, that’s normal on some setups: OAuth redirect stays https://…/auth/desktop-callback; your page performs the second hop to arden://….
+
+2) Deploy a real route (fixes your 404)
+On Vercel / Next.js (your 404 looks like Vercel):
+
+App Router: add a route segment so this path exists:
+/auth/desktop-callback
+e.g. file: app/auth/desktop-callback/page.tsx (or page.jsx).
+Pages Router: pages/auth/desktop-callback.tsx.
+Redeploy. Visiting https://www.ardentime.com/auth/desktop-callback must not 404.
+
+3) Page behavior (logic you implement)
+On first load (no session yet):
+
+Start sign-in (e.g. signInWithOAuth with redirectTo set to the same URL, e.g. https://www.ardentime.com/auth/desktop-callback or the apex equivalent — must match an entry in Supabase Redirect URLs).
+After Supabase returns to that URL (session available):
+
+Read the session (PKCE: exchange code if needed; or use getSession() after the client processes the URL — follow your stack’s Supabase guide).
+From session, take access_token, refresh_token, and expires_in (use the session’s expiry field your client exposes; often expires_in is derivable — pass a numeric seconds value as the desktop expects).
+Redirect the top-level window to:
+arden://auth/callback?access_token=<url-encoded>&refresh_token=<url-encoded>&expires_in=<seconds>
+Build that with URLSearchParams (or equivalent) so encoding is correct.
+
+Edge cases:
+
+If there’s already a session when the desktop opens this page, skip OAuth and jump straight to the arden://… redirect (optional UX improvement).
+4) HTTPS / domain consistency
+Pick one canonical URL for redirectTo in code and Supabase (www vs apex) so you don’t get mismatched redirect allowlists.
+Your Electron shell currently opens https://ardentime.com/...; either keep the site’s redirect config aligned with that or change the app later to match www — what matters is no 404 and redirect URLs allowed in Supabase.
+5) How to verify
+In a normal browser, open /auth/desktop-callback → should load your page (not Vercel 404).
+Complete login; you should get a prompt / handoff to Arden for arden:// (OS may ask to open the app).
+In %LOCALAPPDATA%\Arden\electron.log, you should see something like tokens delivered / success path after the protocol fires.
+Summary
+This repo’s job for this failure mode is already done: open URL → listen on localhost.
+Your missing piece is: deploy /auth/desktop-callback, register it in Supabase, and redirect to arden://auth/callback with the three query params above.
+If you tell me whether ardentime.com is Next.js App Router or Pages (or something else), I can narrow this to exact file paths and a minimal pseudo-code snippet for that router — still in Ask mode I won’t edit your repo, but I can spell it out line-by-line.

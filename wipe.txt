@@ -1,0 +1,45 @@
+Clean wipe (recommended order)
+Do this only with all Arden / ArdenTrack processes stopped so nothing recreates locks or writes while you delete.
+
+1) Quit apps
+Tray: Quit ArdenTrack (and legacy Arden if it has a tray).
+
+Confirm in Task Manager nothing is named ArdenTrack / Electron shell for Ard… / stray ardentrack.exe.
+
+If something won’t quit, End task those processes.
+
+2) Delete local data (this project’s layout)
+Delete the whole folder:
+
+%LOCALAPPDATA%\Arden
+
+(In Explorer: Win+R → %LOCALAPPDATA%\Arden → delete the folder.)
+
+That removes ardentrack.db, userdata\, logs, locks, etc. This is safe for a reinstall; back up first if anything in there matters.
+
+3) Remove Windows Credential Manager tokens for ArdenTrack
+Win+R → control /name Microsoft.CredentialManager
+Windows Credentials
+Expand anything named ArdenTrack (or generic entries that clearly map to Arden desktop / ArdenTrack).
+Remove.
+If you previously used chunked tokens, there may be multiple entries (e.g. access_token__chunk_0 style, depending how Windows shows them)—remove all Arden-related.
+
+4) Legacy “Arden desktop” app
+Prefer Apps → Installed apps → uninstall if you truly want zero overlap during testing.
+
+If uninstall leaves data behind, legacy apps sometimes use something like %LOCALAPPDATA%\<Vendor>\... or %APPDATA%. Searching File Explorer under %LOCALAPPDATA% and %APPDATA% for “Arden” after uninstall is reasonable; delete only folders you recognize as the old product (or rename to .bak).
+
+5) Reinstall
+Run your current ArdenTrack Setup 1.0.0.exe again after a reboot if you want to be paranoid about file locks.
+
+After that, watch for:
+
+No stored auth credentials plus (when Electron opens the browser) completion of https://ardentime.com/auth/desktop-callback → arden://auth/callback?... so tokens land via the local listener.
+Debugging if it still fails (not just “dirty state”)
+After a clean slate, open electron.log as well as ardentrack.log. You want to see AUTH_LISTENING= and Electron opening ardentime.com/auth/desktop-callback; if ARDEN_SKIP_BROWSER_OPEN is set anywhere, the browser won’t open.
+
+If IndexError in set_session appears again after a real login, that’s a code bug / hardening issue: the app should reject non-JWT access tokens and call clear_tokens() instead of passing them to GoTrue. I can implement that in Agent mode if you want.
+
+“User not subscribed” will continue until your subscription / is_user_subscribed path is satisfied in the DB (separate from Supabase login).
+
+Bottom line: Your symptoms match failed or absent OAuth on the first 5 minutes, then bad or shared keyring tokens causing the GoTrue crash. A full quit → delete %LOCALAPPDATA%\Arden → remove Credential Manager ArdenTrack entries → uninstall duplicate app is the right reset; if the error persists after a clean login, we should harden supabase_sync / auth (and confirm the legacy app doesn’t use the same keyring service name).

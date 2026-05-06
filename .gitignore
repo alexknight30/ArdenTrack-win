@@ -37,7 +37,7 @@ userdata/events_export.csv
 
 # Electron build output
 dist-electron/
-dist-electron-v*/
+dist-electron-*/
 ardentrack-electron/node_modules/
 
 # Environment / secrets

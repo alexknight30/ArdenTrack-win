@@ -1,6 +1,6 @@
 {
   "name": "ardentrack-electron",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Headless Electron shell for ArdenTrack (tray, Python spawn, OAuth protocol, auto-update)",
   "main": "main.js",
   "author": "Arden",
@@ -20,9 +20,14 @@
   "build": {
     "appId": "com.arden.ardentrack",
     "productName": "Arden",
+    "artifactName": "${productName}-Setup-${version}.${ext}",
     "directories": {
       "output": "dist-electron"
     },
+    "files": [
+      "!dist-electron{,/**/*}",
+      "!dist-electron-*{,/**/*}"
+    ],
     "publish": [
       {
         "provider": "github",

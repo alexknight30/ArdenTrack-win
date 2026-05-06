@@ -135,6 +135,7 @@ def main():
             supabase_sync.pull_matters()
             supabase_sync.pull_clients()
             supabase_sync.pull_profile()
+            supabase_sync.pull_billing_status()
             supabase_sync.push_unsynced_entries()
             logger.info("Initial Supabase sync complete")
         except Exception:
@@ -157,6 +158,7 @@ def main():
                     supabase_sync.pull_matters()
                     supabase_sync.pull_clients()
                     supabase_sync.pull_profile()
+                    supabase_sync.pull_billing_status()
             except Exception:
                 logger.exception("supabase pull loop")
 

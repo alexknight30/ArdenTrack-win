@@ -214,6 +214,32 @@ def pull_profile() -> None:
         logger.exception("pull_profile")
 
 
+def pull_billing_status() -> None:
+    """Fetch billing_status from the Supabase `profiles` (plural) table and update local auth_user."""
+    try:
+        client = _get_client()
+        if not client:
+            logger.debug("pull_billing_status: skipped (no client)")
+            return
+        uid = _get_user_id()
+        if not uid:
+            logger.debug("pull_billing_status: skipped (no user_id)")
+            return
+        res = client.table("profiles").select("billing_status").eq("id", uid).limit(1).execute()
+        rows = getattr(res, "data", None) or []
+        if not rows:
+            logger.info("pull_billing_status: no profiles row found for user %s", uid[:8])
+            return
+        status = rows[0].get("billing_status")
+        if status:
+            logger.info("pull_billing_status: billing_status=%s", status)
+            db.update_billing_status(status)
+        else:
+            logger.info("pull_billing_status: billing_status is null/empty in profiles")
+    except Exception:
+        logger.exception("pull_billing_status")
+
+
 def push_unsynced_entries() -> None:
     try:
         entries = db.get_unsynced_entries()

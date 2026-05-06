@@ -1005,6 +1005,16 @@ def mark_telemetry_synced(ids: list):
     conn.commit()
 
 
+def update_billing_status(status: str) -> None:
+    """Set billing_status on the singleton auth_user row without touching other fields."""
+    conn = get_db_connection()
+    conn.execute(
+        "UPDATE auth_user SET billing_status = ?, updated_at = datetime('now') WHERE id = 1",
+        (status,),
+    )
+    conn.commit()
+
+
 def is_user_subscribed() -> bool:
     """Return True if the auth_user row shows an active or trialing subscription."""
     conn = get_db_connection()

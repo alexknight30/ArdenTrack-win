@@ -62,8 +62,10 @@ CLASSIFY_INTERVAL = _env_int("ARDEN_CLASSIFY_INTERVAL_SEC", 120)
 API_URL = "https://as-api.onrender.com/api/classify"
 API_TIMEOUT = 60          # seconds
 MAX_CONSECUTIVE_FAILURES = 3
+_BILLING_CHECK_INTERVAL = 300   # re-fetch billing_status at most every 5 minutes
 
 _START_TIME = time.monotonic()
+_last_billing_check = 0.0
 
 
 def _get_uptime_min() -> float:
@@ -483,8 +485,24 @@ def _run_iteration():
         return None
 
     if not db.is_user_subscribed():
-        logger.debug("User not subscribed — skipping classification")
-        return None
+        global _last_billing_check
+        now = time.monotonic()
+        if now - _last_billing_check >= _BILLING_CHECK_INTERVAL:
+            _last_billing_check = now
+            logger.info("User not subscribed — refreshing billing status from Supabase")
+            try:
+                from ardentrack import supabase_sync
+                supabase_sync.pull_billing_status()
+            except Exception:
+                logger.exception("Billing status refresh failed")
+            if db.is_user_subscribed():
+                logger.info("Billing status updated — proceeding with classification")
+            else:
+                logger.info("Still not subscribed after refresh — skipping classification")
+                return None
+        else:
+            logger.info("User not subscribed — skipping classification")
+            return None
 
     smoother.refresh_durations()
     smoother.consolidate_stagnant()

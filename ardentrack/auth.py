@@ -8,6 +8,7 @@ import base64
 import json
 import logging
 import os
+import threading
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -23,6 +24,7 @@ KR_REFRESH = "refresh_token"
 KR_EXPIRY = "token_expiry"
 
 _TOKEN_REFRESH_MARGIN_SEC = 300
+_refresh_lock = threading.Lock()
 
 
 def _jwt_payload_unverified(token: str) -> dict[str, Any]:
@@ -113,6 +115,10 @@ def store_tokens(
     billing_status = meta.get("billing_status")
     if billing_status is None and isinstance(meta.get("subscription"), dict):
         billing_status = meta["subscription"].get("status")
+    if billing_status is None:
+        existing = db.get_auth_user_row()
+        if existing:
+            billing_status = existing.get("billing_status")
 
     is_premium = 1 if str(meta.get("tier", "")).lower() in ("premium", "paid") else 0
 
@@ -218,14 +224,20 @@ def _refresh_access_token() -> str | None:
 
 
 def get_valid_token() -> str | None:
-    """Return a usable access JWT, refreshing if needed. Never raises."""
+    """Return a usable access JWT, refreshing if needed. Never raises.
+
+    A lock serialises the expired-check + refresh so concurrent callers
+    don't each fire a separate refresh (Supabase invalidates a refresh
+    token after its first use).
+    """
     try:
         if not has_credentials():
             return None
-        access = get_access_token()
-        if access and not is_token_expired():
-            return access
-        return _refresh_access_token()
+        with _refresh_lock:
+            access = get_access_token()
+            if access and not is_token_expired():
+                return access
+            return _refresh_access_token()
     except Exception:
         logger.exception("get_valid_token")
         return None

@@ -130,6 +130,7 @@ def main():
 
     tok = auth.get_valid_token()
     if tok:
+        auth.ensure_auth_user_row(tok)
         logger.info("Auth token valid — starting initial Supabase sync")
         try:
             supabase_sync.pull_matters()

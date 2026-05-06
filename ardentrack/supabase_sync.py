@@ -219,11 +219,11 @@ def pull_billing_status() -> None:
     try:
         client = _get_client()
         if not client:
-            logger.debug("pull_billing_status: skipped (no client)")
+            logger.info("pull_billing_status: skipped (no client)")
             return
         uid = _get_user_id()
         if not uid:
-            logger.debug("pull_billing_status: skipped (no user_id)")
+            logger.info("pull_billing_status: skipped (no user_id)")
             return
         res = client.table("profiles").select("billing_status").eq("id", uid).limit(1).execute()
         rows = getattr(res, "data", None) or []

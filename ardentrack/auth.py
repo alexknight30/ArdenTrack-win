@@ -135,6 +135,35 @@ def store_tokens(
         logger.exception("upsert_auth_user after store_tokens")
 
 
+def ensure_auth_user_row(access_token: str) -> None:
+    """Populate auth_user from JWT claims if the row is missing or has no user_id."""
+    existing = db.get_auth_user_row()
+    if existing and existing.get("user_id"):
+        return
+    claims = _jwt_payload_unverified(access_token)
+    sub = claims.get("sub")
+    if not sub:
+        return
+    meta = claims.get("user_metadata") or {}
+    billing_status = (existing or {}).get("billing_status")
+    if billing_status is None:
+        billing_status = meta.get("billing_status")
+        if billing_status is None and isinstance(meta.get("subscription"), dict):
+            billing_status = meta["subscription"].get("status")
+    try:
+        db.upsert_auth_user(
+            user_id=sub,
+            email=claims.get("email"),
+            name=meta.get("full_name") or meta.get("name") or claims.get("name"),
+            firm_name=meta.get("firm_name") or (existing or {}).get("firm_name"),
+            billing_status=billing_status,
+            is_premium=1 if str(meta.get("tier", "")).lower() in ("premium", "paid") else 0,
+        )
+        logger.info("ensure_auth_user_row: created/updated auth_user for %s", sub[:8])
+    except Exception:
+        logger.exception("ensure_auth_user_row")
+
+
 def get_refresh_token() -> str | None:
     try:
         kr = _load_keyring()

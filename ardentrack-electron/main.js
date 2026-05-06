@@ -7,6 +7,7 @@ const {
   nativeImage,
   shell,
   Notification,
+  dialog,
 } = require("electron");
 const { spawn } = require("child_process");
 const fs = require("fs");
@@ -15,9 +16,9 @@ const crypto = require("crypto");
 const http = require("http");
 
 const log = {
-  info: (...a) => console.log("[ArdenTrack]", ...a),
-  warn: (...a) => console.warn("[ArdenTrack]", ...a),
-  error: (...a) => console.error("[ArdenTrack]", ...a),
+  info: (...a) => console.log("[Arden]", ...a),
+  warn: (...a) => console.warn("[Arden]", ...a),
+  error: (...a) => console.error("[Arden]", ...a),
 };
 
 const { autoUpdater } = require("electron-updater");
@@ -135,7 +136,7 @@ async function handleProtocolUrl(urlStr) {
     log.warn("protocol callback missing tokens");
     if (Notification.isSupported()) {
       new Notification({
-        title: "ArdenTrack",
+        title: "Arden",
         body: "Authentication failed — please try again",
       }).show();
     }
@@ -156,15 +157,15 @@ async function handleProtocolUrl(urlStr) {
     log.info("tokens delivered to Python");
     if (Notification.isSupported()) {
       new Notification({
-        title: "ArdenTrack",
-        body: "Arden is connected",
+        title: "Arden",
+        body: "Connected successfully",
       }).show();
     }
   } catch (e) {
     log.error("token POST failed", e);
     if (Notification.isSupported()) {
       new Notification({
-        title: "ArdenTrack",
+        title: "Arden",
         body: "Authentication failed — please try again",
       }).show();
     }
@@ -217,11 +218,31 @@ function spawnPython() {
   });
 }
 
+function resolveTrayIconPath() {
+  if (app.isPackaged) {
+    const packagedPath = path.join(process.resourcesPath, "icon.ico");
+    if (fs.existsSync(packagedPath)) {
+      return packagedPath;
+    }
+    log.warn("Packaged tray icon missing:", packagedPath);
+  }
+  const devPath = path.join(__dirname, "build", "icon.ico");
+  if (fs.existsSync(devPath)) {
+    return devPath;
+  }
+  log.warn("Dev tray icon missing:", devPath);
+  return null;
+}
+
 function buildTray() {
-  const iconPath = path.join(__dirname, "build", "icon.ico");
+  const iconPath = resolveTrayIconPath();
   let image = null;
-  if (fs.existsSync(iconPath)) {
+  if (iconPath) {
     image = nativeImage.createFromPath(iconPath);
+    if (image.isEmpty()) {
+      log.warn("Tray icon file loaded empty:", iconPath);
+      image = null;
+    }
   }
   if (!image || image.isEmpty()) {
     image = nativeImage.createEmpty();
@@ -234,7 +255,7 @@ function buildTray() {
   }
 
   const menu = Menu.buildFromTemplate([
-    { label: "ArdenTrack is running", enabled: false },
+    { label: "Arden is running", enabled: false },
     { type: "separator" },
     {
       label: "Check for updates",
@@ -253,18 +274,36 @@ function buildTray() {
     },
   ]);
   tray.setContextMenu(menu);
-  tray.setToolTip("ArdenTrack");
+  tray.setToolTip("Arden");
 }
+
+let _updateDownloadDialogShown = false;
 
 function setupAutoUpdater() {
   autoUpdater.autoDownload = true;
   autoUpdater.autoInstallOnAppQuit = true;
-  autoUpdater.on("update-downloaded", () => {
-    if (Notification.isSupported()) {
-      new Notification({
-        title: "ArdenTrack",
-        body: "Update ready — will install on next restart",
-      }).show();
+  autoUpdater.on("update-downloaded", async (info) => {
+    if (_updateDownloadDialogShown) {
+      return;
+    }
+    _updateDownloadDialogShown = true;
+    const ver = (info && info.version) || "";
+    try {
+      const result = await dialog.showMessageBox({
+        type: "info",
+        title: "Arden",
+        message: ver ? `Update to v${ver} is ready.` : "An update is ready.",
+        detail: "Restart now to finish installing. If you choose Later, the update installs when you quit Arden.",
+        buttons: ["Restart now", "Later"],
+        defaultId: 0,
+        cancelId: 1,
+      });
+      if (result.response === 0) {
+        autoUpdater.quitAndInstall(false, true);
+      }
+    } catch (e) {
+      log.warn("update dialog failed", e);
+      _updateDownloadDialogShown = false;
     }
   });
   autoUpdater.on("error", (e) => log.warn("updater error", e));
@@ -289,6 +328,11 @@ if (!gotLock) {
   });
 
   app.whenReady().then(() => {
+    if (process.platform === "win32") {
+      app.setAppUserModelId("com.arden.ardentrack");
+    }
+    app.setName("Arden");
+
     buildTray();
     spawnPython();
     setupAutoUpdater();

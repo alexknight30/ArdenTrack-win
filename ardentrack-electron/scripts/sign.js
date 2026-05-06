@@ -43,7 +43,7 @@ exports.default = async function sign(configuration) {
     "/fd", "sha256",
     "/tr", tsaUrl,
     "/td", "sha256",
-    "/d", "ArdenTrack",
+    "/d", "Arden",
     `"${filePath}"`,
   ].join(" ");
 

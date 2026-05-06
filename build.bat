@@ -12,6 +12,7 @@ echo === Building ardentrack.exe ===
 pyinstaller ^
     --onefile ^
     --name ardentrack ^
+    --icon=ardentrack-electron\build\icon.ico ^
     --hidden-import=win32timezone ^
     --hidden-import=keyring.backends.Windows ^
     --hidden-import=dotenv ^
@@ -39,7 +40,7 @@ dir dist\ardentrack.exe
 
 if defined WIN_SIGN_CERT_SHA1 (
     echo === Signing ardentrack.exe with certificate %WIN_SIGN_CERT_SHA1% ===
-    signtool sign /sha1 %WIN_SIGN_CERT_SHA1% /fd sha256 /tr http://timestamp.digicert.com /td sha256 /d "ArdenTrack" dist\ardentrack.exe
+    signtool sign /sha1 %WIN_SIGN_CERT_SHA1% /fd sha256 /tr http://timestamp.digicert.com /td sha256 /d "Arden" dist\ardentrack.exe
     if %ERRORLEVEL% NEQ 0 (
         echo === SIGNING FAILED ===
         exit /b 1

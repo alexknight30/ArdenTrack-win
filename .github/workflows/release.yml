@@ -28,7 +28,7 @@ jobs:
 
       - name: Build ardentrack.exe
         run: |
-          pyinstaller --onefile --name ardentrack ^
+          pyinstaller --onefile --name ardentrack --icon=ardentrack-electron\build\icon.ico ^
             --hidden-import=win32timezone ^
             --hidden-import=keyring.backends.Windows ^
             --hidden-import=dotenv ^

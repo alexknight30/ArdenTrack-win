@@ -23,6 +23,12 @@ const log = {
 
 const { autoUpdater } = require("electron-updater");
 
+try {
+  app.setName("Arden");
+} catch (_e) {
+  /* setName only applies before ready */
+}
+
 let tray = null;
 let pythonProcess = null;
 let pythonRestartCount = 0;
@@ -331,7 +337,6 @@ if (!gotLock) {
     if (process.platform === "win32") {
       app.setAppUserModelId("com.arden.ardentrack");
     }
-    app.setName("Arden");
 
     buildTray();
     spawnPython();

@@ -26,6 +26,16 @@ KR_EXPIRY = "token_expiry"
 _TOKEN_REFRESH_MARGIN_SEC = 300
 _refresh_lock = threading.Lock()
 
+auth_dead_event = threading.Event()
+_on_tokens_stored_callbacks: list = []
+
+
+def register_on_tokens_stored(callback) -> None:
+    """Register a callable to be invoked (in the storing thread) after tokens
+    are successfully persisted.  Used by main.py to push unsynced entries on
+    re-authentication."""
+    _on_tokens_stored_callbacks.append(callback)
+
 
 def _jwt_payload_unverified(token: str) -> dict[str, Any]:
     try:
@@ -134,6 +144,17 @@ def store_tokens(
     except Exception:
         logger.exception("upsert_auth_user after store_tokens")
 
+    was_dead = auth_dead_event.is_set()
+    auth_dead_event.clear()
+    if was_dead:
+        logger.info("Auth restored — session is live again")
+
+    for cb in _on_tokens_stored_callbacks:
+        try:
+            cb()
+        except Exception:
+            logger.exception("on_tokens_stored callback")
+
 
 def ensure_auth_user_row(access_token: str) -> None:
     """Populate auth_user from JWT claims if the row is missing or has no user_id."""
@@ -202,6 +223,7 @@ def clear_tokens() -> None:
         kr.delete_password(KEYRING_SERVICE, KR_EXPIRY)
     except Exception:
         pass
+    auth_dead_event.set()
 
 
 def is_token_expired() -> bool:
@@ -234,7 +256,7 @@ def _refresh_access_token() -> str | None:
             timeout=30,
         )
         if not resp.ok:
-            logger.warning("Token refresh failed: %s %s", resp.status_code, resp.text[:200])
+            logger.error("Token refresh failed: %s %s", resp.status_code, resp.text[:200])
             clear_tokens()
             return None
         data = resp.json()

@@ -117,9 +117,11 @@ def main():
     logger.info("SUPABASE_ANON_KEY = %s", "set (%d chars)" % len(os.environ.get("SUPABASE_ANON_KEY", "")) if os.environ.get("SUPABASE_ANON_KEY") else "<not set>")
 
     token_received_event = threading.Event()
-    if not auth.has_credentials():
-        logger.info("No stored auth credentials — starting auth listener on localhost")
-        auth_server.start_auth_listener(token_received_event)
+    needs_initial_auth = not auth.has_credentials()
+    auth_server.start_auth_listener(token_received_event, open_browser=needs_initial_auth)
+
+    if needs_initial_auth:
+        logger.info("No stored auth credentials — waiting for browser login")
         if not token_received_event.wait(timeout=AUTH_WAIT_SEC):
             logger.warning(
                 "No auth credentials within %ds — continuing in offline-only mode",
@@ -149,6 +151,39 @@ def main():
             )
 
     stop_event = threading.Event()
+
+    # ------------------------------------------------------------------
+    # Auth recovery: push unsynced entries whenever tokens are restored
+    # ------------------------------------------------------------------
+    def _on_auth_restored():
+        def _push():
+            try:
+                logger.info("Auth restored — pushing unsynced entries")
+                supabase_sync.push_unsynced_entries()
+            except Exception:
+                logger.exception("push_unsynced_entries after re-auth")
+        threading.Thread(target=_push, name="reauth-push", daemon=True).start()
+
+    auth.register_on_tokens_stored(_on_auth_restored)
+
+    # ------------------------------------------------------------------
+    # Auth-death watcher: signal Electron when re-auth is needed
+    # ------------------------------------------------------------------
+    def _auth_death_watcher():
+        while not stop_event.is_set():
+            auth.auth_dead_event.wait()
+            if stop_event.is_set():
+                return
+            logger.error("Auth session died — requesting re-authentication")
+            print("AUTH_REAUTH_NEEDED", flush=True)
+            while auth.auth_dead_event.is_set() and not stop_event.is_set():
+                stop_event.wait(30)
+
+    threading.Thread(
+        target=_auth_death_watcher,
+        name="auth-death-watcher",
+        daemon=True,
+    ).start()
 
     def _supabase_pull_loop():
         while True:

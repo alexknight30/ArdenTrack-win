@@ -16,8 +16,19 @@ logger = logging.getLogger(__name__)
 
 _SKIP_CLOUD_KEYS = frozenset({"user_id"})
 
+_client_cache = None
+_client_url: str | None = None
+
 
 def _get_client():
+    """Return a Supabase client with a valid access token on the PostgREST headers.
+
+    The client is cached so we never call set_session() (which can trigger
+    supabase-py's own token refresh, racing with our keyring-based refresh
+    and causing refresh_token_already_used errors).  Only our auth.py code
+    ever touches refresh tokens.
+    """
+    global _client_cache, _client_url
     try:
         url = (os.environ.get("SUPABASE_URL") or "").strip()
         anon = (os.environ.get("SUPABASE_ANON_KEY") or "").strip()
@@ -25,17 +36,19 @@ def _get_client():
             logger.debug("Supabase env vars missing — URL=%s, KEY=%s",
                          "set" if url else "MISSING", "set" if anon else "MISSING")
             return None
+
         access = auth.get_valid_token()
-        refresh = auth.get_refresh_token()
-        if not access or not refresh:
-            logger.debug("No auth tokens — access=%s, refresh=%s",
-                         "present" if access else "MISSING", "present" if refresh else "MISSING")
+        if not access:
+            logger.debug("No valid access token available")
             return None
-        logger.debug("Creating Supabase client for %s", url)
-        client = create_client(url, anon)
-        client.auth.set_session(access, refresh)
-        logger.debug("Supabase session set successfully")
-        return client
+
+        if _client_cache is None or _client_url != url:
+            logger.debug("Creating Supabase client for %s", url)
+            _client_cache = create_client(url, anon)
+            _client_url = url
+
+        _client_cache.postgrest.auth(access)
+        return _client_cache
     except Exception:
         logger.exception("_get_client")
         return None

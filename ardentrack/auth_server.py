@@ -1,5 +1,8 @@
 """
-Temporary localhost HTTP server to receive OAuth tokens from Electron.
+Localhost HTTP server to receive OAuth tokens from Electron.
+
+Stays alive for the lifetime of the process so re-authentication can
+deliver fresh tokens at any time.
 """
 
 from __future__ import annotations
@@ -16,10 +19,18 @@ from ardentrack import auth
 logger = logging.getLogger(__name__)
 
 
-def start_auth_listener(token_received_event: threading.Event) -> None:
+def start_auth_listener(
+    token_received_event: threading.Event,
+    *,
+    open_browser: bool = True,
+) -> None:
     """
     Bind POST /auth/tokens on 127.0.0.1:ARDEN_AUTH_CALLBACK_PORT (default 17951).
-    On success, signal token_received_event and shut down the server.
+
+    The server stays running for the lifetime of the process so that
+    re-authentication tokens can be received at any time.  When
+    *open_browser* is True, ``AUTH_LISTENING=<port>`` is printed to stdout
+    so Electron opens the login page in the default browser.
     """
     port = int((os.environ.get("ARDEN_AUTH_CALLBACK_PORT") or "17951").strip())
     expected_secret = (os.environ.get("ARDEN_AUTH_CALLBACK_TOKEN") or "").strip()
@@ -71,16 +82,9 @@ def start_auth_listener(token_received_event: threading.Event) -> None:
                     return
 
                 token_received_event.set()
+                logger.info("Auth tokens received and stored successfully")
                 self.send_response(200)
                 self.end_headers()
-
-                def _shutdown():
-                    try:
-                        self.server.shutdown()
-                    except Exception:
-                        pass
-
-                threading.Thread(target=_shutdown, daemon=True).start()
 
             def log_message(self, fmt: str, *args) -> None:
                 if "token" in fmt.lower():
@@ -92,7 +96,9 @@ def start_auth_listener(token_received_event: threading.Event) -> None:
     def serve() -> None:
         Handler = make_handler()
         httpd = ThreadingHTTPServer(("127.0.0.1", port), Handler)
-        print(f"AUTH_LISTENING={port}\n", flush=True)
+        if open_browser:
+            print(f"AUTH_LISTENING={port}\n", flush=True)
+        logger.info("Auth listener running on 127.0.0.1:%d (open_browser=%s)", port, open_browser)
         try:
             httpd.serve_forever()
         except Exception:

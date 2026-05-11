@@ -210,6 +210,19 @@ function spawnPython() {
         shell.openExternal("https://ardentime.com/auth/desktop-callback");
       }
     }
+    if (s.includes("AUTH_REAUTH_NEEDED")) {
+      log.warn("Python reports auth session expired — prompting re-auth");
+      if (Notification.isSupported()) {
+        const n = new Notification({
+          title: "Arden",
+          body: "Session expired — click to re-authenticate",
+        });
+        n.on("click", () => {
+          shell.openExternal("https://ardentime.com/auth/desktop-callback");
+        });
+        n.show();
+      }
+    }
   });
   pythonProcess.stderr.on("data", (buf) => {
     appendElectronLog("[stderr] " + buf.toString().trimEnd());
@@ -263,6 +276,12 @@ function buildTray() {
   const menu = Menu.buildFromTemplate([
     { label: "Arden is running", enabled: false },
     { type: "separator" },
+    {
+      label: "Re-authenticate",
+      click: () => {
+        shell.openExternal("https://ardentime.com/auth/desktop-callback");
+      },
+    },
     {
       label: "Check for updates",
       click: () => {
